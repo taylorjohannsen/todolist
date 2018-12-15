@@ -7,8 +7,12 @@
 </head>
 
 <body>
-    <button onclick="">Create new project +</button>
-    <button onclick="deleteProj()">Delete Project -</button>
+    <form action="#" onsubmit="render(); return false">
+        <input type="text" id="title" placeholder="Title">
+        <input type="text" id="date" placeholder="Date">
+        <input type="submit" value="Create new Project +">
+    </form>
+
     <div id="projList"></div>
     <br>
     <br>
@@ -16,8 +20,8 @@
 
 
 
+    <script type="text/javascript" src="./app.js"></script>
 
 </body>
 
-<script type="text/javascript" src="./app.js"></script>
 </html>
