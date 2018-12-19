@@ -1,4 +1,17 @@
 body {
-    color: white;
-    background-color: grey;
+    color: black;
+   
+}
+.mainForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    text-align: center;
+}
+.editForm {
+    display: none;
+}
+#Submit {
+    margin-bottom: 40px;
 }

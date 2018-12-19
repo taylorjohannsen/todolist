@@ -7,16 +7,30 @@
 </head>
 
 <body>
-    <form action="#" onsubmit="render(); return false">
-        <input type="text" id="title" placeholder="Title">
-        <input type="text" id="date" placeholder="Date">
-        <input type="submit" value="Create new Project +">
+    <input type="button" id="Submit" value="Create New Project +">
+
+    <form class="mainForm" action="#" autocomplete="off">
+        <input type="text" id="title" placeholder="To-do Title">
+        <input type="text" id="body" placeholder="To-do Body">
+        Important? <input type="checkbox" id="checked">
     </form>
 
+
     <div id="projList"></div>
-    <br>
-    <br>
-    <div id="projName"></div>
+    <div id="testTask"></div>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <form id="editForm" class="editForm" action="#" autocomplete="off">
+        <input type="text" id="editTitle" placeholder="To-do Title">
+        <input type="text" id="editBody" placeholder="To-do Body">
+        <input type="button" id="editInput">
+    </form>
+    
+
+
 
 
 
@@ -25,3 +39,4 @@
 </body>
 
 </html>
+
