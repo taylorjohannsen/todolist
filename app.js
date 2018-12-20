@@ -1,4 +1,5 @@
-
+let objArray = [];
+let x = 0;
 
 class todoSetup {
     constructor(parent, title, body, priority) {
@@ -11,13 +12,14 @@ class todoSetup {
     }
 
     init() {
-        this.parent.appendChild(this.containter);
-        this.containter.appendChild(this.addMainInfo());
+        this.addMainInfo();
+        this.containter.id = x;
+        objArray.push(this.containter);
+        this.parent.appendChild(objArray[x]);
+        x++;
     }
 
     addMainInfo() {
-        const fragment = document.createDocumentFragment();
-
         const testTitle = document.createElement('div');
         testTitle.innerText = this.title;
 
@@ -43,18 +45,32 @@ class todoSetup {
         let editInput = document.querySelector('#editInput');
         editInput.value = 'Submit';
         editInput.addEventListener('click', () => {
-            testTitle.innerText = document.getElementById('editTitle').value;
-            testBody.innerText = document.getElementById('editBody').value;
+            let fragment = document.createDocumentFragment;
 
-            editForm.style.display = 'none';
+            let newBody = document.getElementById('editBody').value;
+            let newTitle = document.getElementById('editTitle').value;
+            this.title = newTitle;
+            this.body = newBody;
+            let titleDiv = document.createElement('div');
+            let bodyDiv = document.createElement('div');
+            titleDiv.innerText = this.title;
+            bodyDiv.innerText = this.body;
+
+            fragment.appendChild(titleDiv);
+            fragment.appendChild(bodyDiv);
+            fragment.appendChild(deleteButton);
+            fragment.appendChild(editButton);
+            
+            objArray.splice(x, x);
+
+            objArray.push(fragment);
         })
 
-        fragment.appendChild(testTitle);
-        fragment.appendChild(testBody);
-        fragment.appendChild(editButton);
-        fragment.appendChild(deleteButton);
+        this.containter.appendChild(testTitle);
+        this.containter.appendChild(testBody);
+        this.containter.appendChild(deleteButton);
+        this.containter.appendChild(editButton);
 
-        return fragment;
     }
 }
 
@@ -99,6 +115,6 @@ class projectSetup {
 
 
 document.querySelector('#Submit').addEventListener('click', () => {
-    let projectName = window.prompt('Project Name?');
+    let projectName = document.querySelector("#newName").value;
     new projectSetup(document.querySelector('#projList'), projectName); 
 })
