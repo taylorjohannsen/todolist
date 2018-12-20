@@ -1,22 +1,21 @@
 let objArray = [];
 let x = 0;
 
-class todoSetup {
-    constructor(parent, title, body, priority) {
+class TodoSetup {
+    constructor(parent, title, body, priority, id) {
         this.containter = document.createElement('div');
         this.body = body;
         this.parent = parent;
         this.title = title;
         this.priority = priority;
+        this.id = id;
         this.init();
     }
 
     init() {
+        this.parent.appendChild(this.containter);
         this.addMainInfo();
-        this.containter.id = x;
-        objArray.push(this.containter);
-        this.parent.appendChild(objArray[x]);
-        x++;
+
     }
 
     addMainInfo() {
@@ -38,6 +37,7 @@ class todoSetup {
 
         let editButton = document.createElement('button');
         editButton.innerText = 'Edit';
+        editButton.id = x;
         editButton.addEventListener('click', () => {
             editForm.style.display = 'block';
         })
@@ -45,25 +45,6 @@ class todoSetup {
         let editInput = document.querySelector('#editInput');
         editInput.value = 'Submit';
         editInput.addEventListener('click', () => {
-            let fragment = document.createDocumentFragment;
-
-            let newBody = document.getElementById('editBody').value;
-            let newTitle = document.getElementById('editTitle').value;
-            this.title = newTitle;
-            this.body = newBody;
-            let titleDiv = document.createElement('div');
-            let bodyDiv = document.createElement('div');
-            titleDiv.innerText = this.title;
-            bodyDiv.innerText = this.body;
-
-            fragment.appendChild(titleDiv);
-            fragment.appendChild(bodyDiv);
-            fragment.appendChild(deleteButton);
-            fragment.appendChild(editButton);
-            
-            objArray.splice(x, x);
-
-            objArray.push(fragment);
         })
 
         this.containter.appendChild(testTitle);
@@ -72,9 +53,9 @@ class todoSetup {
         this.containter.appendChild(editButton);
 
     }
-}
 
-class projectSetup {
+
+class ProjectSetup {
     constructor(parent, name) {
         this.parent = parent;
         this.child = document.createElement('div');
@@ -99,11 +80,12 @@ class projectSetup {
             let isChecked = checkBox.checked;
             let todoBody = document.getElementById('body').value;
             
-            new todoSetup(this.child, todoTitle, todoBody, isChecked);
+            objArray.push(new TodoSetup(this.child, todoTitle, todoBody, isChecked, x));
 
             document.getElementById('title').value = "";
             document.getElementById('body').value = "";
             checkBox.checked = false;
+            x++;
         })
 
         nameFragment.appendChild(setupButton);
@@ -116,5 +98,5 @@ class projectSetup {
 
 document.querySelector('#Submit').addEventListener('click', () => {
     let projectName = document.querySelector("#newName").value;
-    new projectSetup(document.querySelector('#projList'), projectName); 
+    new ProjectSetup(document.querySelector('#projList'), projectName); 
 })
