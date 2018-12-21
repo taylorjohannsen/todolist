@@ -9,34 +9,15 @@
 <body>
     <input type="text" id="newName" placeholder="Project Title">
     <input type="button" id="Submit" value="Create New Project +">
-
     <form class="mainForm" action="#" autocomplete="off">
         <input type="text" id="title" placeholder="To-do Title">
         <input type="text" id="body" placeholder="To-do Body">
-        Important? <input type="checkbox" id="checked">
+        Important? <input type="checkbox" id="checked" unchecked>
     </form>
-
-
-    <div id="projList"></div>
+    <h1 id="projList"></h1>
     <div id="testTask"></div>
-<br>
-<br>
-<br>
-<br>
-<br>
-    <form id="editForm" class="editForm" action="#" autocomplete="off">
-        <input type="text" id="editTitle" placeholder="To-do Title">
-        <input type="text" id="editBody" placeholder="To-do Body">
-        <input type="button" id="editInput">
-    </form>
-    
-
-
-
-
-
+    <div id="editForm"></div>
     <script type="text/javascript" src="./app.js"></script>
-
 </body>
 
 </html>

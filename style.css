@@ -3,7 +3,7 @@ body {
    
 }
 .mainForm {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     width: 200px;

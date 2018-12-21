@@ -1,102 +1,124 @@
-let objArray = [];
+const objArray = [];
 let x = 0;
 
 class TodoSetup {
-    constructor(parent, title, body, priority, id) {
-        this.containter = document.createElement('div');
+    constructor(projName, parent, title, body, priority, id) {
         this.body = body;
         this.parent = parent;
         this.title = title;
         this.priority = priority;
+        this.container = document.createElement('div');
         this.id = id;
-        this.init();
-    }
-
-    init() {
-        this.parent.appendChild(this.containter);
-        this.addMainInfo();
-
-    }
-
-    addMainInfo() {
-        const testTitle = document.createElement('div');
-        testTitle.innerText = this.title;
-
-        const testBody = document.createElement('div');
-        testBody.innerText = this.body;
-
-        if (this.priority == true) {
-            this.containter.style.backgroundColor = 'green';
-        }
-
-        let deleteButton = document.createElement('button');
-        deleteButton.innerText = 'Delete';
-        deleteButton.addEventListener('click', () =>{
-            this.containter.remove();
-        })
-
-        let editButton = document.createElement('button');
-        editButton.innerText = 'Edit';
-        editButton.id = x;
-        editButton.addEventListener('click', () => {
-            editForm.style.display = 'block';
-        })
-
-        let editInput = document.querySelector('#editInput');
-        editInput.value = 'Submit';
-        editInput.addEventListener('click', () => {
-        })
-
-        this.containter.appendChild(testTitle);
-        this.containter.appendChild(testBody);
-        this.containter.appendChild(deleteButton);
-        this.containter.appendChild(editButton);
-
-    }
-
-
-class ProjectSetup {
-    constructor(parent, name) {
-        this.parent = parent;
-        this.child = document.createElement('div');
-        this.name = name;
-        this.setup();
-    }
-
-    setup() {
-        this.parent.appendChild(this.child);
-        this.child.appendChild(this.mainSetup());
-    }
-
-    mainSetup() {
-        const nameFragment = document.createDocumentFragment();
-
-        const setupButton = document.createElement('button');
-        setupButton.innerText = 'Create New To-Do +';
-
-        setupButton.addEventListener('click', () => {
-            let todoTitle = document.getElementById('title').value;
-            let checkBox = document.getElementById('checked');
-            let isChecked = checkBox.checked;
-            let todoBody = document.getElementById('body').value;
-            
-            objArray.push(new TodoSetup(this.child, todoTitle, todoBody, isChecked, x));
-
-            document.getElementById('title').value = "";
-            document.getElementById('body').value = "";
-            checkBox.checked = false;
-            x++;
-        })
-
-        nameFragment.appendChild(setupButton);
-        
-        return nameFragment;
+        this.projName = projName;
     }
 }
 
 
-
 document.querySelector('#Submit').addEventListener('click', () => {
+    let todoTitle = document.getElementById('title').value;
+    let checkBox = document.getElementById('checked');
+    let isChecked = checkBox.checked;
+    let todoBody = document.getElementById('body').value;
     let projectName = document.querySelector("#newName").value;
-    new ProjectSetup(document.querySelector('#projList'), projectName); 
+
+    objArray.push(new TodoSetup(projectName, document.querySelector('#testTask'), todoTitle, todoBody, isChecked, x));
+    render();
+
+    x++;
+    document.getElementById('title').value = "";
+    document.getElementById('body').value = "";
+    document.getElementById('newName').style.display = "none";
+    document.querySelector('.mainForm').style.display = 'flex';
+    checkBox.checked = false;
+
 })
+
+function render() {
+    objArray.forEach(object => {
+        object.container.innerText = '';
+
+        const objName = document.querySelector('#projList');
+        objName.innerText = '';
+        objName.innerText = object.projName;    
+        
+        const objContainer = document.createElement('div');
+        const objTitle = document.createElement('div');
+        objTitle.innerText = object.title;
+
+        const objDescription = document.createElement('div');
+        objDescription.innerText = object.body;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.innerText = 'Delete';
+        deleteButton.addEventListener('click', () => {
+            deleteInfo(object.id);
+        })
+
+        if (object.priority == true) {
+            objContainer.style.background = "lightgreen";
+        } 
+
+        const editButton = document.createElement('button');
+        editButton.innerText = 'Edit';
+        editButton.addEventListener('click', () => {
+            editForm.style.display = 'block';
+            editInfo(object.id);
+    })
+
+        objContainer.appendChild(objTitle);
+        objContainer.appendChild(objDescription);
+        objContainer.appendChild(editButton);        
+        objContainer.appendChild(deleteButton);
+
+        object.container.appendChild(objContainer);
+        object.parent.appendChild(object.container);
+    })
+}
+
+function editInfo(idNumber) {
+    const editTodo = objArray.find(function (todo) {
+        return todo.id === idNumber;
+    })
+
+    const editParent = document.querySelector('#editForm');
+
+    const editTitle = document.createElement('input');
+    editTitle.type = 'text';
+    editTitle.placeholder = 'Edit Title';
+
+    const editBody = document.createElement('input');
+    editBody.type = 'text';
+    editBody.placeholder = 'Edit Body';
+
+    const editPriority = document.createElement('input');
+    editPriority.type = "checkbox";
+
+    const subButton = document.createElement('button');
+    subButton.innerText = 'Submit';
+
+    editParent.appendChild(editTitle);
+    editParent.appendChild(editBody);
+    editParent.appendChild(editPriority);
+    editParent.appendChild(subButton);
+
+    subButton.addEventListener('click', () => {
+        editTodo.title = editTitle.value;
+        editTodo.body = editBody.value;
+        editTodo.priority = editPriority.checked;
+
+
+        render();
+        editForm.style.display = 'none';
+        editParent.innerHTML = '';
+    })
+}
+
+function deleteInfo(newNumber) {
+    const editTodo = objArray.find(function (todo) {
+        return todo.id === newNumber;
+    })
+
+    editTodo.container.remove();
+    objArray.splice(objArray.indexOf(editTodo), 1);
+    render();
+}
