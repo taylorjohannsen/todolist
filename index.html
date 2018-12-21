@@ -7,16 +7,25 @@
 </head>
 
 <body>
-    <input type="text" id="newName" placeholder="Project Title">
-    <input type="button" id="Submit" value="Create New Project +">
-    <form class="mainForm" action="#" autocomplete="off">
-        <input type="text" id="title" placeholder="To-do Title">
-        <input type="text" id="body" placeholder="To-do Body">
-        Important? <input type="checkbox" id="checked" unchecked>
-    </form>
-    <h1 id="projList"></h1>
-    <div id="testTask"></div>
-    <div id="editForm"></div>
+    <div class="mainCont">
+        <div id="nameCont">
+            <input type="text" id="newName" placeholder="Project Title">
+            <input type="button" onclick="editTitle()" id="titleChange" value="Change Title Name">
+        </div>
+        <br>
+        <input type="button" id="Submit" value="Create New Todo +">
+        <form class="mainForm" action="#" autocomplete="off">
+            <input type="text" id="title" placeholder="To-do Title">
+            <input type="text" id="body" placeholder="To-do Body"><br>
+            <div class="test">Important?<input type="checkbox" id="checked" unchecked></div>
+        </form>
+        <div class="newStuff">      
+            <h1 id="projList"></h1>
+            <div id="testTask"></div>
+            <div id="editForm"></div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="./app.js"></script>
 </body>
 

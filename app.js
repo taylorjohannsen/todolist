@@ -10,6 +10,13 @@ class TodoSetup {
         this.container = document.createElement('div');
         this.id = id;
         this.projName = projName;
+        this.titleRender();
+    }
+
+    titleRender() {
+        const objName = document.querySelector('#projList');
+        objName.innerText = '';
+        objName.innerText = this.projName;
     }
 }
 
@@ -29,6 +36,7 @@ document.querySelector('#Submit').addEventListener('click', () => {
     document.getElementById('body').value = "";
     document.getElementById('newName').style.display = "none";
     document.querySelector('.mainForm').style.display = 'flex';
+    document.querySelector('#titleChange').style.display = 'flex';
     checkBox.checked = false;
 
 })
@@ -36,10 +44,6 @@ document.querySelector('#Submit').addEventListener('click', () => {
 function render() {
     objArray.forEach(object => {
         object.container.innerText = '';
-
-        const objName = document.querySelector('#projList');
-        objName.innerText = '';
-        objName.innerText = object.projName;    
         
         const objContainer = document.createElement('div');
         const objTitle = document.createElement('div');
@@ -121,4 +125,8 @@ function deleteInfo(newNumber) {
     editTodo.container.remove();
     objArray.splice(objArray.indexOf(editTodo), 1);
     render();
+}
+
+function editTitle() {
+    document.getElementById('newName').style.display = "flex";
 }

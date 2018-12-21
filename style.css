@@ -1,17 +1,52 @@
 body {
     color: black;
-   
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline;
+    justify-content: center;
 }
 .mainForm {
     display: none;
+    text-align: center;
     flex-direction: column;
-    justify-content: center;
-    width: 200px;
     text-align: center;
 }
 .editForm {
     display: none;
 }
 #Submit {
-    margin-bottom: 40px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    margin-top: 10%;
+    text-align: center;
+    width: 200px;
+}
+#titleChange {
+    display: none;
+}
+input {
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 2px;
+    text-align: center;
+    width: 175px;
+}
+button {
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 2px;
+    text-align: center;
+    width: 200px;
+}
+.mainCont {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.newStuff {
+    margin-top: 10%;
+}
+.test {
+    text-align: left;
 }
